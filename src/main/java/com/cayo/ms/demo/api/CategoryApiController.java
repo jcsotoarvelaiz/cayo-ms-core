@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.context.request.NativeWebRequest;
 
 import jakarta.validation.constraints.*;
 import jakarta.validation.Valid;
@@ -26,21 +25,20 @@ import java.util.Map;
 import java.util.Optional;
 import jakarta.annotation.Generated;
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-07-25T12:43:38.751802684-04:00[America/New_York]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-07-25T13:32:01.526325541-04:00[America/New_York]")
 @Controller
 @RequestMapping("${openapi.demoOpenAPI30.base-path:/api/v3}")
 public class CategoryApiController implements CategoryApi {
 
-    private final NativeWebRequest request;
+    private final CategoryApiDelegate delegate;
 
-    @Autowired
-    public CategoryApiController(NativeWebRequest request) {
-        this.request = request;
+    public CategoryApiController(@Autowired(required = false) CategoryApiDelegate delegate) {
+        this.delegate = Optional.ofNullable(delegate).orElse(new CategoryApiDelegate() {});
     }
 
     @Override
-    public Optional<NativeWebRequest> getRequest() {
-        return Optional.ofNullable(request);
+    public CategoryApiDelegate getDelegate() {
+        return delegate;
     }
 
 }

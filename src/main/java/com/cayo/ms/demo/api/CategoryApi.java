@@ -17,28 +17,24 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.multipart.MultipartFile;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.*;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 import jakarta.annotation.Generated;
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-07-25T12:43:38.751802684-04:00[America/New_York]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-07-25T13:32:01.526325541-04:00[America/New_York]")
 @Validated
 @Tag(name = "category", description = "the category API")
 public interface CategoryApi {
 
-    default Optional<NativeWebRequest> getRequest() {
-        return Optional.empty();
+    default CategoryApiDelegate getDelegate() {
+        return new CategoryApiDelegate() {};
     }
 
     /**
@@ -73,17 +69,7 @@ public interface CategoryApi {
     default ResponseEntity<Category> addCategory(
         @Parameter(name = "Category", description = "Create a new Category", required = true) @Valid @RequestBody Category category
     ) {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"name\" : \"Dogs\", \"id\" : 1 }";
-                    ApiUtil.setExampleResponse(request, "application/json", exampleString);
-                    break;
-                }
-            }
-        });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
+        return getDelegate().addCategory(category);
     }
 
 
@@ -115,8 +101,7 @@ public interface CategoryApi {
         @Parameter(name = "categoryId", description = "Category id to delete", required = true, in = ParameterIn.PATH) @PathVariable("categoryId") Long categoryId,
         @Parameter(name = "api_key", description = "", in = ParameterIn.HEADER) @RequestHeader(value = "api_key", required = false) String apiKey
     ) {
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
+        return getDelegate().deleteCategory(categoryId, apiKey);
     }
 
 
@@ -151,17 +136,7 @@ public interface CategoryApi {
     default ResponseEntity<List<Category>> findCategoriesByName(
         @Parameter(name = "name", description = "Status values that need to be considered for filter", in = ParameterIn.QUERY) @Valid @RequestParam(value = "name", required = false) String name
     ) {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "[ { \"name\" : \"Dogs\", \"id\" : 1 }, { \"name\" : \"Dogs\", \"id\" : 1 } ]";
-                    ApiUtil.setExampleResponse(request, "application/json", exampleString);
-                    break;
-                }
-            }
-        });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
+        return getDelegate().findCategoriesByName(name);
     }
 
 
@@ -199,17 +174,7 @@ public interface CategoryApi {
     default ResponseEntity<Category> getCategoryById(
         @Parameter(name = "categoryId", description = "ID of category to return", required = true, in = ParameterIn.PATH) @PathVariable("categoryId") Long categoryId
     ) {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"name\" : \"Dogs\", \"id\" : 1 }";
-                    ApiUtil.setExampleResponse(request, "application/json", exampleString);
-                    break;
-                }
-            }
-        });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
+        return getDelegate().getCategoryById(categoryId);
     }
 
 
@@ -249,17 +214,7 @@ public interface CategoryApi {
     default ResponseEntity<Category> updateCategory(
         @Parameter(name = "Category", description = "Update an existent category", required = true) @Valid @RequestBody Category category
     ) {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"name\" : \"Dogs\", \"id\" : 1 }";
-                    ApiUtil.setExampleResponse(request, "application/json", exampleString);
-                    break;
-                }
-            }
-        });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
+        return getDelegate().updateCategory(category);
     }
 
 
@@ -293,8 +248,7 @@ public interface CategoryApi {
         @Parameter(name = "name", description = "Name of category that needs to be updated", in = ParameterIn.QUERY) @Valid @RequestParam(value = "name", required = false) String name,
         @Parameter(name = "description", description = "Description of category that needs to be updated", in = ParameterIn.QUERY) @Valid @RequestParam(value = "description", required = false) String description
     ) {
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
+        return getDelegate().updateCategoryWithForm(categoryId, name, description);
     }
 
 }
