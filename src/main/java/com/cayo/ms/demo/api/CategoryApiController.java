@@ -33,7 +33,7 @@ public class CategoryApiController implements CategoryApi {
     private final CategoryApiDelegate delegate;
 
     public CategoryApiController(@Autowired(required = false) CategoryApiDelegate delegate) {
-        this.delegate = Optional.ofNullable(delegate).orElse(new CategoryApiDelegate() {});
+        this.delegate = Optional.ofNullable(delegate).orElse(new CategoryAPIDelegateImpl());
     }
 
     @Override
