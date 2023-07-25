@@ -1,0 +1,261 @@
+openapi: 3.0.3
+info:
+  description: Demo to test Archeotype
+  title: Demo - OpenAPI 3.0
+  version: 1.0.0
+servers:
+- url: https://localhost:8080/api/v3
+paths:
+  /category:
+    post:
+      description: Add a new category
+      operationId: addCategory
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Category'
+        description: Create a new Category
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Category'
+          description: Successful operation
+        "405":
+          description: Invalid input
+      security:
+      - demo_auth:
+        - write:categories
+        - read:categories
+      summary: Add a new category
+      tags:
+      - category
+      x-content-type: application/json
+      x-accepts: application/json
+      x-tags:
+      - tag: category
+    put:
+      description: Update an existing category by Id
+      operationId: updateCategory
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Category'
+        description: Update an existent category
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Category'
+          description: Successful operation
+        "400":
+          description: Invalid ID supplied
+        "404":
+          description: Category not found
+        "405":
+          description: Validation exception
+      security:
+      - demo_auth:
+        - write:categories
+        - read:categories
+      summary: Update an existing category
+      tags:
+      - category
+      x-content-type: application/json
+      x-accepts: application/json
+      x-tags:
+      - tag: category
+  /category/findByName:
+    get:
+      description: Multiple status values can be provided with comma separated strings
+      operationId: findCategoriesByName
+      parameters:
+      - description: Status values that need to be considered for filter
+        explode: true
+        in: query
+        name: name
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Category'
+                type: array
+          description: successful operation
+        "400":
+          description: Invalid status value
+      security:
+      - demo_auth:
+        - write:categories
+        - read:categories
+      summary: Finds Categories by name
+      tags:
+      - category
+      x-accepts: application/json
+      x-tags:
+      - tag: category
+  /category/{categoryId}:
+    delete:
+      description: delete a category
+      operationId: deleteCategory
+      parameters:
+      - description: ""
+        explode: false
+        in: header
+        name: api_key
+        required: false
+        schema:
+          type: string
+        style: simple
+      - description: Category id to delete
+        explode: false
+        in: path
+        name: categoryId
+        required: true
+        schema:
+          format: int64
+          type: integer
+        style: simple
+      responses:
+        "400":
+          description: Invalid category value
+      security:
+      - demo_auth:
+        - write:categories
+        - read:categories
+      summary: Deletes a category
+      tags:
+      - category
+      x-accepts: application/json
+      x-tags:
+      - tag: category
+    get:
+      description: Returns a single category
+      operationId: getCategoryById
+      parameters:
+      - description: ID of category to return
+        explode: false
+        in: path
+        name: categoryId
+        required: true
+        schema:
+          format: int64
+          type: integer
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Category'
+          description: successful operation
+        "400":
+          description: Invalid ID supplied
+        "404":
+          description: Category not found
+      security:
+      - api_key: []
+      - demo_auth:
+        - write:categories
+        - read:categories
+      summary: Find category by Id
+      tags:
+      - category
+      x-accepts: application/json
+      x-tags:
+      - tag: category
+    post:
+      description: ""
+      operationId: updateCategoryWithForm
+      parameters:
+      - description: ID of category that needs to be updated
+        explode: false
+        in: path
+        name: categoryId
+        required: true
+        schema:
+          format: int64
+          type: integer
+        style: simple
+      - description: Name of category that needs to be updated
+        explode: true
+        in: query
+        name: name
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Description of category that needs to be updated
+        explode: true
+        in: query
+        name: description
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "405":
+          description: Invalid input
+      security:
+      - demo_auth:
+        - write:categories
+        - read:categories
+      summary: Updates a category with form data
+      tags:
+      - category
+      x-accepts: application/json
+      x-tags:
+      - tag: category
+components:
+  schemas:
+    Category:
+      example:
+        name: Dogs
+        id: 1
+      properties:
+        id:
+          example: 1
+          format: int64
+          type: integer
+        name:
+          example: Dogs
+          type: string
+      type: object
+      xml:
+        name: category
+    ApiResponse:
+      properties:
+        code:
+          format: int32
+          type: integer
+        type:
+          type: string
+        message:
+          type: string
+      type: object
+      xml:
+        name: '##default'
+  securitySchemes:
+    demo_auth:
+      flows:
+        implicit:
+          authorizationUrl: https://localhost:8080/oauth/authorize
+          scopes:
+            write:categories: modify categories in your account
+            read:categories: read your categories
+      type: oauth2
+    api_key:
+      in: header
+      name: api_key
+      type: apiKey
