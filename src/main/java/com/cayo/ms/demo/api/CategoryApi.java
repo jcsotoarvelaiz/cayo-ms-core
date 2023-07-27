@@ -6,6 +6,7 @@
 package com.cayo.ms.demo.api;
 
 import com.cayo.ms.demo.model.Category;
+import com.cayo.ms.demo.model.Error;
 import io.swagger.v3.oas.annotations.ExternalDocumentation;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -28,7 +29,7 @@ import java.util.List;
 import java.util.Map;
 import jakarta.annotation.Generated;
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-07-25T13:32:01.526325541-04:00[America/New_York]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-07-27T19:35:00.570654233-04:00[America/New_York]")
 @Validated
 @Tag(name = "category", description = "the category API")
 public interface CategoryApi {
@@ -158,8 +159,12 @@ public interface CategoryApi {
             @ApiResponse(responseCode = "200", description = "successful operation", content = {
                 @Content(mediaType = "application/json", schema = @Schema(implementation = Category.class))
             }),
-            @ApiResponse(responseCode = "400", description = "Invalid ID supplied"),
-            @ApiResponse(responseCode = "404", description = "Category not found")
+            @ApiResponse(responseCode = "400", description = "Invalid ID supplied", content = {
+                @Content(mediaType = "application/json", schema = @Schema(implementation = Error.class))
+            }),
+            @ApiResponse(responseCode = "404", description = "Category not found", content = {
+                @Content(mediaType = "application/json", schema = @Schema(implementation = Error.class))
+            })
         },
         security = {
             @SecurityRequirement(name = "api_key"),

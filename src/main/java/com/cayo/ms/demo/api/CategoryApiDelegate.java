@@ -1,6 +1,7 @@
 package com.cayo.ms.demo.api;
 
 import com.cayo.ms.demo.model.Category;
+import com.cayo.ms.demo.model.Error;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -16,7 +17,7 @@ import jakarta.annotation.Generated;
  * A delegate to be called by the {@link CategoryApiController}}.
  * Implement this interface with a {@link org.springframework.stereotype.Service} annotated class.
  */
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-07-25T13:32:01.526325541-04:00[America/New_York]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-07-27T19:35:00.570654233-04:00[America/New_York]")
 public interface CategoryApiDelegate {
 
     default Optional<NativeWebRequest> getRequest() {

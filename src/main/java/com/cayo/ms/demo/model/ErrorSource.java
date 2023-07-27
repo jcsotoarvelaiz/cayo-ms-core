@@ -4,6 +4,7 @@ import java.net.URI;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 import org.openapitools.jackson.nullable.JsonNullable;
 import java.time.OffsetDateTime;
 import jakarta.validation.Valid;
@@ -15,54 +16,33 @@ import java.util.*;
 import jakarta.annotation.Generated;
 
 /**
- * Category
+ * ErrorSource
  */
 
+@JsonTypeName("Error_source")
 @Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-07-27T19:35:00.570654233-04:00[America/New_York]")
-public class Category {
+public class ErrorSource {
 
-  private Long id;
+  private String pointer;
 
-  private String name;
-
-  public Category id(Long id) {
-    this.id = id;
+  public ErrorSource pointer(String pointer) {
+    this.pointer = pointer;
     return this;
   }
 
   /**
-   * Get id
-   * @return id
+   * Get pointer
+   * @return pointer
   */
   
-  @Schema(name = "id", example = "1", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
-  @JsonProperty("id")
-  public Long getId() {
-    return id;
+  @Schema(name = "pointer", example = "/data/attributes/firstName", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("pointer")
+  public String getPointer() {
+    return pointer;
   }
 
-  public void setId(Long id) {
-    this.id = id;
-  }
-
-  public Category name(String name) {
-    this.name = name;
-    return this;
-  }
-
-  /**
-   * Get name
-   * @return name
-  */
-  
-  @Schema(name = "name", example = "Dogs", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
-  @JsonProperty("name")
-  public String getName() {
-    return name;
-  }
-
-  public void setName(String name) {
-    this.name = name;
+  public void setPointer(String pointer) {
+    this.pointer = pointer;
   }
 
   @Override
@@ -73,22 +53,20 @@ public class Category {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    Category category = (Category) o;
-    return Objects.equals(this.id, category.id) &&
-        Objects.equals(this.name, category.name);
+    ErrorSource errorSource = (ErrorSource) o;
+    return Objects.equals(this.pointer, errorSource.pointer);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, name);
+    return Objects.hash(pointer);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class Category {\n");
-    sb.append("    id: ").append(toIndentedString(id)).append("\n");
-    sb.append("    name: ").append(toIndentedString(name)).append("\n");
+    sb.append("class ErrorSource {\n");
+    sb.append("    pointer: ").append(toIndentedString(pointer)).append("\n");
     sb.append("}");
     return sb.toString();
   }

@@ -1,6 +1,7 @@
 package com.cayo.ms.demo.api;
 
 import com.cayo.ms.demo.model.Category;
+import com.cayo.ms.demo.model.Error;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +26,7 @@ import java.util.Map;
 import java.util.Optional;
 import jakarta.annotation.Generated;
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-07-25T13:32:01.526325541-04:00[America/New_York]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-07-27T19:35:00.570654233-04:00[America/New_York]")
 @Controller
 @RequestMapping("${openapi.demoOpenAPI30.base-path:/api/v3}")
 public class CategoryApiController implements CategoryApi {
@@ -33,7 +34,7 @@ public class CategoryApiController implements CategoryApi {
     private final CategoryApiDelegate delegate;
 
     public CategoryApiController(@Autowired(required = false) CategoryApiDelegate delegate) {
-        this.delegate = Optional.ofNullable(delegate).orElse(new CategoryAPIDelegateImpl());
+        this.delegate = Optional.ofNullable(delegate).orElse(new CategoryApiDelegate() {});
     }
 
     @Override

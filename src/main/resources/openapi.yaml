@@ -161,8 +161,16 @@ paths:
                 $ref: '#/components/schemas/Category'
           description: successful operation
         "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
           description: Invalid ID supplied
         "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
           description: Category not found
       security:
       - api_key: []
@@ -234,18 +242,29 @@ components:
       type: object
       xml:
         name: category
-    ApiResponse:
+    Error:
       properties:
-        code:
-          format: int32
-          type: integer
-        type:
+        status:
+          example: "422"
+          format: string
           type: string
-        message:
+        source:
+          $ref: '#/components/schemas/Error_source'
+        title:
+          example: Invalid Attribute
+          type: string
+        detail:
+          example: firstName cannot be blank
           type: string
       type: object
       xml:
         name: '##default'
+    Error_source:
+      properties:
+        pointer:
+          example: /data/attributes/firstName
+          type: string
+      type: object
   securitySchemes:
     demo_auth:
       flows:
